@@ -17,7 +17,7 @@ const questType = [
 ];
 
 for(let i = 0; i < questType.length; i++) {
-    const quest =  questType[i];
+    const quest = questType[i];
     const a = document.createElement('a');
     a.href = './quest.html?quest=' + encodeURIComponent(quest);
     a.textContent = quest;
