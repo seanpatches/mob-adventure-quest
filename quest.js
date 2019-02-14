@@ -5,6 +5,7 @@ const title = document.getElementById('title');
 const image = document.getElementById('image');
 const description = document.getElementById('description');
 const options = document.getElementById('options');
+const form = document.getElementById('form');
 
 const search = window.location.search;
 console.log(search);
@@ -26,18 +27,21 @@ for(let i = 0; i < questList.length; i++) {
         const questOptions = currentQuest.options;
 
         for(let i = 0; i < questOptions.length; i++) {
+            const span = document.createElement('span');
+            const label = document.createElement('label');
+            span.textContent = questOptions[i].description;
             const radio = document.createElement('input');
             radio.type = 'radio';
             radio.value = questOptions[i].id;
             radio.name = 'options';
-            options.appendChild(radio);
-            console.log(radio.value);
-
+            label.appendChild(radio);
+            label.appendChild(span);
+            options.appendChild(label);
         }
     }
 }
 
-options.addEventListener('submit', function(event) {
+form.addEventListener('submit', function(event) {
     event.preventDefault();
 });
 
