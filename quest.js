@@ -1,4 +1,7 @@
 import questList from './quest-list.js';
+import displayYoInfoYo from './profile-display.js';
+
+displayYoInfoYo();
 
 const pageTitle = document.getElementById('page-title');
 const title = document.getElementById('title');
@@ -16,46 +19,63 @@ const questUrl = searchParams.get('quest');
 
 for(let i = 0; i < questList.length; i++) {
     const currentQuest = questList[i];
-
+    
     if(currentQuest.id === questUrl) {
         description.textContent = currentQuest.description;
         pageTitle.textContent = currentQuest.title;
         title.textContent = currentQuest.title;
         image.src = currentQuest.image;
-
+        
         questOptions = currentQuest.options;
-
-        for(let i = 0; i < questOptions.length; i++) {
-            const span = document.createElement('span');
-            const label = document.createElement('label');
-            span.textContent = questOptions[i].description;
-            const radio = document.createElement('input');
-            radio.type = 'radio';
-            radio.value = questOptions[i].result;
-            radio.name = 'options';
-            label.appendChild(radio);
-            label.appendChild(span);
-            options.appendChild(label);
-        }
+        makeOptions(questOptions);
+        break;
     }
 }
+
+const characterStatus = window.localStorage.getItem('userProfile');
+const json = JSON.parse(characterStatus);
+
+console.log(json);
+
+
 
 form.addEventListener('submit', function(event) {
     event.preventDefault();
     
     const formDaddy = new FormData(form);
-    const result = formDaddy.get('options');
+    const optionId = formDaddy.get('options');
 
+    for(let i = 0; i < questOptions.length; i++) {
+        const currentOptionId = questOptions[i].id;
+        
+        if(currentOptionId === optionId) {
+            description.textContent = questOptions[i].result;
+            json.scoreDaddy[optionId]++;
+            json.hp += questOptions[i].hp;
+            json.gold += questOptions[i].gold;
+            const characterStatusChange = JSON.stringify(json);
+            window.localStorage.setItem('userProfile', characterStatusChange);
+            displayYoInfoYo();
+            break;
+        } 
+    }
     form.remove();
-    
-    description.textContent = result;
-    
-    
-    
-
-
-    // clear out form
-    // display result (update HP and GOLD)
-    // create button to send user back to map page
 });
+
+
+// Makes radio buttons for options
+function makeOptions(questOptions) {
+    for(let i = 0; i < questOptions.length; i++) {
+        const span = document.createElement('span');
+        const label = document.createElement('label');
+        span.textContent = questOptions[i].description;
+        const radio = document.createElement('input');
+        radio.type = 'radio';
+        radio.value = questOptions[i].id;
+        radio.name = 'options';
+        label.appendChild(radio);
+        label.appendChild(span);
+        options.appendChild(label);
+    }
+}
 

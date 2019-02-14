@@ -23,6 +23,32 @@ const caveOptions = [
     }
 ];
 
+
+const snakeOptions = [
+    {
+        id: 'fight',
+        description: 'Tussle with dem SNAKES!',
+        result: 'you jumped into that pit like Hulk Hogan and ripped them snakes to pieces brother. You lost 15 Hp, and gained Wylies respect +100 texas Gold',
+        hp: -15,
+        gold: 100
+    },
+    {
+        id: 'run',
+        description: 'Cry with Indiana',
+        result: 'You succumbed to your fear and the snksss got ya',
+        hp: -50,
+        gold: 0
+    },
+    {
+        id: 'talk',
+        description: 'Barter with Ray Wylie!',
+        result: 'You wrangled dem der snakes and sold the meat to Ray Wylie for some rations and a ladder to get out. Plus 65Hp, and 15 Gold',
+        hp: 65,
+        gold: 15
+    },
+];
+
+
 const caveQuest = {
     id: 'cave',
     title: 'Cave Quest',
@@ -31,7 +57,16 @@ const caveQuest = {
     options: caveOptions
 };
 
+const snakeQuest = {
+    id: 'snake farm',
+    title: 'Snake Farm Quest',
+    description: 'You have fallen into a snake pit. In the corner, crying in shock and horror, Indiana Jones sits curled in a ball. Ray Wylie Hubbard, towers over his domain and gazes with disgust. What do you do?',
+    image: './assets/snake.jpg',
+    options: snakeOptions
+};
+
 const questList = [
-    caveQuest
+    caveQuest,
+    snakeQuest
 ];
 export default questList;

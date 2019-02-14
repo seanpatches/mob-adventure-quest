@@ -9,7 +9,12 @@ form.addEventListener('submit', function(event) {
         name: formDaddy.get('name'),
         class: formDaddy.get('class'),
         hp: 50,
-        gold: 0
+        gold: 0,
+        scoreDaddy: {
+            run: 0,
+            talk: 0,
+            fight: 0
+        }
     };
 
     const json = JSON.stringify(userProfile);
