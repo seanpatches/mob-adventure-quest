@@ -5,8 +5,8 @@ displayYoInfoYo();
 const questList = document.getElementById('quests');
 
 const questType = [
-    'Cave',
-    'Snake farm'
+    'cave',
+    'snake farm'
 ];
 
 for(let i = 0; i < questType.length; i++) {

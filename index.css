@@ -1,4 +1,9 @@
         
 .quest-link {
     display: block;
+    text-transform: capitalize;
+}
+
+#image{
+    height: 300px;
 }
