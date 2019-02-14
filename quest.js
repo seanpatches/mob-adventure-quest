@@ -8,15 +8,14 @@ const options = document.getElementById('options');
 const form = document.getElementById('form');
 
 const search = window.location.search;
-console.log(search);
 const searchParams = new URLSearchParams(search);
 
+let questOptions = null;
+
 const questUrl = searchParams.get('quest');
-console.log(questUrl);
 
 for(let i = 0; i < questList.length; i++) {
     const currentQuest = questList[i];
-    console.log(currentQuest);
 
     if(currentQuest.id === questUrl) {
         description.textContent = currentQuest.description;
@@ -24,7 +23,7 @@ for(let i = 0; i < questList.length; i++) {
         title.textContent = currentQuest.title;
         image.src = currentQuest.image;
 
-        const questOptions = currentQuest.options;
+        questOptions = currentQuest.options;
 
         for(let i = 0; i < questOptions.length; i++) {
             const span = document.createElement('span');
@@ -32,7 +31,7 @@ for(let i = 0; i < questList.length; i++) {
             span.textContent = questOptions[i].description;
             const radio = document.createElement('input');
             radio.type = 'radio';
-            radio.value = questOptions[i].id;
+            radio.value = questOptions[i].result;
             radio.name = 'options';
             label.appendChild(radio);
             label.appendChild(span);
@@ -43,5 +42,20 @@ for(let i = 0; i < questList.length; i++) {
 
 form.addEventListener('submit', function(event) {
     event.preventDefault();
+    
+    const formDaddy = new FormData(form);
+    const result = formDaddy.get('options');
+
+    form.remove();
+    
+    description.textContent = result;
+    
+    
+    
+
+
+    // clear out form
+    // display result (update HP and GOLD)
+    // create button to send user back to map page
 });
 
