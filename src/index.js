@@ -14,11 +14,15 @@ form.addEventListener('submit', function(event) {
             run: 0,
             talk: 0,
             fight: 0
-        }
+        },
+        unfinishedQuests: [
+            'cave',
+            'snake farm'
+        ]
     };
 
     const json = JSON.stringify(userProfile);
     window.localStorage.setItem('userProfile', json);
 
-    window.location = './map.html';
+    window.location = './display/map.html';
 });

@@ -54,7 +54,8 @@ const caveQuest = {
     title: 'Cave Quest',
     description: 'You have discovered a spooooky cave. Unfortunately there is a cave keeper guarding a magnificent treasure chest. The treasure chest looks valuable but he looks devious. What will you do?',
     image: '../assets/cave.jpg',
-    options: caveOptions
+    options: caveOptions,
+    audio: '../assets/cave.mp3'
 };
 
 const snakeQuest = {
@@ -62,11 +63,13 @@ const snakeQuest = {
     title: 'Snake Farm Quest',
     description: 'You have fallen into a snake pit. In the corner, crying in shock and horror, Indiana Jones sits curled in a ball. Ray Wylie Hubbard, towers over his domain and gazes with disgust. What do you do?',
     image: '../assets/snake.jpg',
-    options: snakeOptions
+    options: snakeOptions,
+    audio: '../assets/snake.mp3'
 };
 
 const questList = [
     caveQuest,
     snakeQuest
 ];
+
 export default questList;

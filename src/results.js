@@ -9,5 +9,8 @@ const userProfile = JSON.parse(json);
 totalHp.textContent = userProfile.hp;
 totalGold.textContent = userProfile.gold;
 
-console.log(userProfile.scoreDaddy);
-tally(userProfile.scoreDaddy);
+const scorecard = userProfile.scoreDaddy;
+
+const scoreDisplay = document.getElementById('result-text');
+scoreDisplay.textContent = tally(scorecard);
+

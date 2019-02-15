@@ -8,6 +8,7 @@ const title = document.getElementById('title');
 const image = document.getElementById('image');
 const description = document.getElementById('description');
 const options = document.getElementById('options');
+const audio = document.getElementById('audio');
 const form = document.getElementById('form');
 
 const search = window.location.search;
@@ -17,6 +18,7 @@ let questOptions = null;
 
 const questUrl = searchParams.get('quest');
 
+
 for(let i = 0; i < questList.length; i++) {
     const currentQuest = questList[i];
     
@@ -25,17 +27,24 @@ for(let i = 0; i < questList.length; i++) {
         pageTitle.textContent = currentQuest.title;
         title.textContent = currentQuest.title;
         image.src = currentQuest.image;
+        audio.src = currentQuest.audio;
         
         questOptions = currentQuest.options;
         makeOptions(questOptions);
+        delete questList[i];
         break;
     }
 }
 
-const characterStatus = window.localStorage.getItem('userProfile');
-const json = JSON.parse(characterStatus);
+const json = window.localStorage.getItem('userProfile');
+const userProfile = JSON.parse(json);
 
-console.log(json);
+const unfinishedQuests = userProfile.unfinishedQuests;
+for(let i = 0; i < unfinishedQuests.length; i++) {
+    if(unfinishedQuests[i] === questUrl) {
+        userProfile.unfinishedQuests.splice(i, 1);
+    }
+}
 
 
 
@@ -50,15 +59,17 @@ form.addEventListener('submit', function(event) {
         
         if(currentOptionId === optionId) {
             description.textContent = questOptions[i].result;
-            json.scoreDaddy[optionId]++;
-            json.hp += questOptions[i].hp;
-            json.gold += questOptions[i].gold;
-            const characterStatusChange = JSON.stringify(json);
+            userProfile.scoreDaddy[optionId]++;
+            userProfile.hp += questOptions[i].hp;
+            userProfile.gold += questOptions[i].gold;
+            const characterStatusChange = JSON.stringify(userProfile);
             window.localStorage.setItem('userProfile', characterStatusChange);
             displayYoInfoYo();
+            
             break;
         } 
     }
+    
     form.remove();
 });
 
