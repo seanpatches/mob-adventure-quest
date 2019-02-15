@@ -1,11 +1,14 @@
 const form = document.getElementById('form');
-
 form.addEventListener('submit', function(event) {
     event.preventDefault();
-    //saves userProfile
+    const userProfile = makeProfile(form);
+    storeData(userProfile);
+    window.location = './display/map.html';
+});
 
+// Creates the profile 
+function makeProfile(form) {
     const formDaddy = new FormData(form);
-
     const userProfile = {
         name: formDaddy.get('name'),
         class: formDaddy.get('class'),
@@ -21,11 +24,13 @@ form.addEventListener('submit', function(event) {
             'snake farm',
             'the black sea'
         ]
-        //tracks to delete post-click
     };
+    // Return because we still need this object
+    return userProfile;
+}
 
+// Puts userProfile into local storage
+function storeData(userProfile) {
     const json = JSON.stringify(userProfile);
     window.localStorage.setItem('userProfile', json);
-    //saves userProfile
-    window.location = './display/map.html';
-});
+}

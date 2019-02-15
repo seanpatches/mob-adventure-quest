@@ -1,11 +1,14 @@
 import displayYoInfoYo from './profile-display.js';
+import getData from './get-data.js';
 
-const json = window.localStorage.getItem('userProfile');
-const userProfile = JSON.parse(json);
+const userProfile = getData();
+makeLinks(userProfile);
 
+// Checks if unfinished quests are removed from userProfile
 if(userProfile.unfinishedQuests.length === 0) {
     window.location = './results.html';
 }
+// Checks if you died
 if(userProfile.hp <= 0) {
     //change to death page later
     window.location = './results.html';
@@ -13,16 +16,20 @@ if(userProfile.hp <= 0) {
 
 displayYoInfoYo();
 
-const questList = document.getElementById('quests');
 
-const questType = userProfile.unfinishedQuests;
+// Makes the links to the quests
+function makeLinks(userProfile) {
+    const questList = document.getElementById('quests');
 
-for(let i = 0; i < questType.length; i++) {
-    const quest = questType[i];
-    const a = document.createElement('a');
-    a.href = './quest.html?quest=' + encodeURIComponent(quest);
-    a.textContent = quest;
-    a.id = quest;
-    a.classList.add('quest-link');
-    questList.appendChild(a);
+    const questType = userProfile.unfinishedQuests;
+    
+    for(let i = 0; i < questType.length; i++) {
+        const quest = questType[i];
+        const a = document.createElement('a');
+        a.href = './quest.html?quest=' + encodeURIComponent(quest);
+        a.textContent = quest;
+        a.id = quest;
+        a.classList.add('quest-link');
+        questList.appendChild(a);
+    }
 }

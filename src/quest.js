@@ -1,8 +1,10 @@
 import questList from './quest-list.js';
 import displayYoInfoYo from './profile-display.js';
+import getData from './get-data.js';
 
 displayYoInfoYo();
 
+// HTML elements to be targeted
 const pageTitle = document.getElementById('page-title');
 const title = document.getElementById('title');
 const image = document.getElementById('image');
@@ -11,14 +13,14 @@ const options = document.getElementById('options');
 const audio = document.getElementById('audio');
 const form = document.getElementById('form');
 
-const search = window.location.search;
+// Pulling URL value from URL
+const search = window.location.search; // ?quest=cave or ?quest=snake&20farm etc
 const searchParams = new URLSearchParams(search);
+const questUrl = searchParams.get('quest'); // quest is key that was made in map.js
 
 let questOptions = null;
 
-const questUrl = searchParams.get('quest');
-
-
+// Building quest page by filling in element targeted above
 for(let i = 0; i < questList.length; i++) {
     const currentQuest = questList[i];
     
@@ -30,23 +32,15 @@ for(let i = 0; i < questList.length; i++) {
         audio.src = currentQuest.audio;
         
         questOptions = currentQuest.options;
-        makeOptions(questOptions);
-        delete questList[i];
-        break;
+        makeOptions(questOptions); // Makes radio buttons for options
+        console.log(questList);
+        
+        break; // Ends for loop
     }
 }
 
-const json = window.localStorage.getItem('userProfile');
-const userProfile = JSON.parse(json);
-
-const unfinishedQuests = userProfile.unfinishedQuests;
-for(let i = 0; i < unfinishedQuests.length; i++) {
-    if(unfinishedQuests[i] === questUrl) {
-        userProfile.unfinishedQuests.splice(i, 1);
-    }
-}
-
-
+const userProfile = getData();
+removeQuest(userProfile, questUrl);
 
 form.addEventListener('submit', function(event) {
     event.preventDefault();
@@ -65,14 +59,11 @@ form.addEventListener('submit', function(event) {
             const characterStatusChange = JSON.stringify(userProfile);
             window.localStorage.setItem('userProfile', characterStatusChange);
             displayYoInfoYo();
-            
             break;
         } 
     }
-    
     form.remove();
 });
-
 
 // Makes radio buttons for options
 function makeOptions(questOptions) {
@@ -90,3 +81,12 @@ function makeOptions(questOptions) {
     }
 }
 
+// Removes current quest from userProfile
+function removeQuest(userProfile, questUrl) {
+    const unfinishedQuests = userProfile.unfinishedQuests;
+    for(let i = 0; i < unfinishedQuests.length; i++) {
+        if(unfinishedQuests[i] === questUrl) {
+            userProfile.unfinishedQuests.splice(i, 1);
+        }
+    }
+}

@@ -1,3 +1,4 @@
+// 
 function displayYoInfoYo() {
     const userProfileDisplay = document.getElementById('user-profile-display');
 
