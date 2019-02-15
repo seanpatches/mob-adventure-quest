@@ -11,7 +11,7 @@ if(userProfile.unfinishedQuests.length === 0) {
 // Checks if you died
 if(userProfile.hp <= 0) {
     //change to death page later
-    window.location = './results.html';
+    window.location = '../display/death.html';
 }
 
 displayYoInfoYo();

@@ -1,4 +1,12 @@
-        
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+}
+
+h1 {
+    font-family: 'UnifrakturCook', cursive;
+}
+
 .quest-link {
     display: block;
     text-transform: capitalize;
