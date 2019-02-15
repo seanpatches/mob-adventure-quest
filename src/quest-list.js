@@ -23,7 +23,6 @@ const caveOptions = [
     }
 ];
 
-
 const snakeOptions = [
     {
         id: 'fight',
@@ -48,6 +47,30 @@ const snakeOptions = [
     },
 ];
 
+const oceanOptions = [
+    {
+        id: 'talk',
+        description: 'You compliment the kraken, and lend your voice in harmony',
+        result: 'The kraken hates you\'re singing. Why did you do that ya goof?',
+        hp: -600,
+        gold: -600
+    },
+    {
+        id: 'fight',
+        description: 'Draw your blunderbuss and challenge him to a duel',
+        result: 'While the kraken is large and terrifying it also does not have opposable thumbs and can\'t use projectiles, so you make short work of his tender body.',
+        hp: 0,
+        gold: 200
+    },
+    {
+        id: 'run',
+        description: 'Run away',
+        result: 'You may have survived, but the kraken\'s tentacles were able to reach your sachel and stole a kings share of your gold doubloons.',
+        hp: 0,
+        gold: -200
+    },
+];
+
 
 const caveQuest = {
     id: 'cave',
@@ -67,9 +90,19 @@ const snakeQuest = {
     audio: '../assets/snake.mp3'
 };
 
+const oceanQuest = {
+    id: 'the black sea',
+    title: 'Ocean Quest',
+    description: 'You hear a beautiful melody coming from the nearby sea. Is that Crazy Frog you ask yourself? Upon your approach the sound turns into a screech that could only belong to your old arch nemisis: The Kraken. Not again, I\'m sick of tussling with the Kraken you think to yourself.',
+    image: '../assets/ocean.png',
+    options: oceanOptions,
+    audio: '../assets/ocean.mp3'
+};
+
 const questList = [
     caveQuest,
-    snakeQuest
+    snakeQuest,
+    oceanQuest
 ];
 
 export default questList;

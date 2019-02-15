@@ -4,7 +4,7 @@ function displayYoInfoYo() {
     const json = window.localStorage.getItem('userProfile');
     const userProfile = JSON.parse(json);
 
-    userProfileDisplay.textContent = userProfile.name + ' is an ' + userProfile.class + ' and has ' + userProfile.hp + ' hp and ' + userProfile.gold + ' Gold';
+    userProfileDisplay.textContent = userProfile.name + ' is ' + userProfile.class + ' and has ' + userProfile.hp + ' hp and ' + userProfile.gold + ' Gold';
 }
 
 export default displayYoInfoYo;

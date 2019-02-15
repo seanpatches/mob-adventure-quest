@@ -2,6 +2,7 @@ const form = document.getElementById('form');
 
 form.addEventListener('submit', function(event) {
     event.preventDefault();
+    //saves userProfile
 
     const formDaddy = new FormData(form);
 
@@ -17,12 +18,14 @@ form.addEventListener('submit', function(event) {
         },
         unfinishedQuests: [
             'cave',
-            'snake farm'
+            'snake farm',
+            'the black sea'
         ]
+        //tracks to delete post-click
     };
 
     const json = JSON.stringify(userProfile);
     window.localStorage.setItem('userProfile', json);
-
+    //saves userProfile
     window.location = './display/map.html';
 });
